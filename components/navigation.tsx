@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import musicNote from "./images/musicalNote.svg";
 import reel from "./images/reel.svg";
@@ -22,8 +23,10 @@ export const Navigation = () => {
 };
 
 const NavItem = ({ category, image }: { category: string; image: string }) => {
+  const openService = () => {
+  };
   return (
-    <div className="flex group items-center">
+    <div className="flex group items-center" onClick={() => openService()}>
       <Image src={image} alt={category} />
       <p className="md:opacity-0 group-hover:opacity-100">{category}</p>
     </div>
