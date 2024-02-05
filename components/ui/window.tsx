@@ -1,25 +1,53 @@
+"use client";
+import Draggable from "react-draggable";
 import { Button } from "./button";
+import { UseDispatch, useDispatch } from "react-redux";
+import {
+  WindowSlice,
+  hideWindow,
+} from "@/app/GlobalRedux/Features/windows/windowSlice";
 import { Cross2Icon, SquareIcon } from "@radix-ui/react-icons";
 
-export const Window = ({ category }: { category: string }) => {
+export const Window = ({
+  category,
+  opacity,
+}: {
+  category: keyof WindowSlice;
+  opacity: number;
+}) => {
   return (
-    <section className="border-2">
-      <div className="bg-blue-900 dark:bg-red-900 flex justify-between items-center p-2 rounded-lg">
-        <div></div>
-        <h2 className="text-white">{category}</h2>
-        <ButtonGroup />
-      </div>
-    </section>
+    <Draggable defaultPosition={{ x: 50, y: 0 }} handle=".handle">
+      <section
+        className={`border-2 absolute w-10/12 handle cursor-move opacity-${opacity} z-${opacity}`}
+      >
+        <div className="bg-blue-900 dark:bg-red-900 flex justify-between items-center p-2 rounded-lg">
+          <div></div>
+          <h2 className="text-white">
+            {category} {opacity}
+          </h2>
+          <ButtonGroup category={category} />
+        </div>
+      </section>
+    </Draggable>
   );
 };
 
-export const ButtonGroup = () => {
+interface ButtonGroupProps {
+  category: keyof WindowSlice;
+}
+
+export const ButtonGroup: React.FC<ButtonGroupProps> = ({ category }) => {
+  const dispatch = useDispatch();
   return (
     <div className="flex gap-2">
       <Button variant="secondary" size="sm">
         <SquareIcon />
       </Button>
-      <Button variant="secondary" size="sm">
+      <Button
+        variant="secondary"
+        size="sm"
+        onClick={() => dispatch(hideWindow({ feature: category }))}
+      >
         <Cross2Icon />
       </Button>
     </div>

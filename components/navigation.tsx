@@ -6,6 +6,11 @@ import picture from "./images/picture.svg";
 import typewriter from "./images/typewriter.svg";
 import map from "./images/map.svg";
 import { ModeToggle } from "./modeToggle";
+import { useDispatch } from "react-redux";
+import {
+  WindowSlice,
+  showWindow,
+} from "@/app/GlobalRedux/Features/windows/windowSlice";
 
 export const Navigation = () => {
   return (
@@ -22,8 +27,16 @@ export const Navigation = () => {
   );
 };
 
-const NavItem = ({ category, image }: { category: string; image: string }) => {
+const NavItem = ({
+  category,
+  image,
+}: {
+  category: keyof WindowSlice;
+  image: string;
+}) => {
+  const dispatch = useDispatch();
   const openService = () => {
+    dispatch(showWindow({ feature: category }));
   };
   return (
     <div className="flex group items-center" onClick={() => openService()}>
