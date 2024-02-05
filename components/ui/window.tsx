@@ -7,6 +7,7 @@ import {
   hideWindow,
 } from "@/app/GlobalRedux/Features/windows/windowSlice";
 import { Cross2Icon, SquareIcon } from "@radix-ui/react-icons";
+import { OptionView } from "../hocs/optionView";
 
 export const Window = ({
   category,
@@ -19,17 +20,17 @@ export const Window = ({
     if (value) return `opacity-1 z-1 cursor-move`;
     return `opacity-0 z-0 cursor-none hidden`;
   };
+
   return (
     <Draggable defaultPosition={{ x: 50, y: 0 }} handle=".handle">
-      <div
-        className={`border-2 absolute w-10/12 handle ${windowSettings(
-          opacity
-        )}`}
-      >
-        <div className="bg-blue-900 dark:bg-red-900 flex justify-between items-center p-2 rounded-lg">
-          <div></div>
-          <h2 className="text-white">{category}</h2>
-          <ButtonGroup category={category} />
+      <div className={`${windowSettings(opacity)} flex flex-column`}>
+        <div className={`border-2 border-black absolute w-10/12 handle `}>
+          <div className="bg-blue-900 dark:bg-red-900 flex justify-between items-center p-2 border-b-rounded-lg">
+            <div></div>
+            <h2 className="text-white">{category}</h2>
+            <ButtonGroup category={category} />
+          </div>
+          <OptionView category={category} />
         </div>
       </div>
     </Draggable>
