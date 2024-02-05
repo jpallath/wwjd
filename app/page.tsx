@@ -1,9 +1,8 @@
 "use client";
 import { Navigation } from "@/components/navigation";
 import { Window } from "@/components/ui/window";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import type { RootState } from "./GlobalRedux/store";
-import { useEffect } from "react";
 
 export default function Home() {
   const musicOpacity = useSelector((state: RootState) => state.window.music);

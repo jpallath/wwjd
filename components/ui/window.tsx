@@ -1,7 +1,7 @@
 "use client";
 import Draggable from "react-draggable";
 import { Button } from "./button";
-import { UseDispatch, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   WindowSlice,
   hideWindow,
@@ -15,19 +15,23 @@ export const Window = ({
   category: keyof WindowSlice;
   opacity: number;
 }) => {
+  const windowSettings = (value: number) => {
+    if (value) return `opacity-1 z-1 cursor-move`;
+    return `opacity-0 z-0 cursor-none hidden`;
+  };
   return (
     <Draggable defaultPosition={{ x: 50, y: 0 }} handle=".handle">
-      <section
-        className={`border-2 absolute w-10/12 handle cursor-move opacity-${opacity} z-${opacity}`}
+      <div
+        className={`border-2 absolute w-10/12 handle ${windowSettings(
+          opacity
+        )}`}
       >
         <div className="bg-blue-900 dark:bg-red-900 flex justify-between items-center p-2 rounded-lg">
           <div></div>
-          <h2 className="text-white">
-            {category} {opacity}
-          </h2>
+          <h2 className="text-white">{category}</h2>
           <ButtonGroup category={category} />
         </div>
-      </section>
+      </div>
     </Draggable>
   );
 };
