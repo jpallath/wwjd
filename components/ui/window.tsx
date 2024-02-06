@@ -17,15 +17,15 @@ export const Window = ({
   opacity: number;
 }) => {
   const windowSettings = (value: number) => {
-    if (value) return `opacity-1 z-1 cursor-move`;
+    if (value) return `opacity-1 z-1 `;
     return `opacity-0 z-0 cursor-none hidden`;
   };
 
   return (
     <Draggable defaultPosition={{ x: 50, y: 0 }} handle=".handle">
       <div className={`${windowSettings(opacity)} flex flex-column`}>
-        <div className={`border-2 border-black absolute w-10/12 handle `}>
-          <div className="bg-blue-900 dark:bg-red-900 flex justify-between items-center p-2 border-b-rounded-lg">
+        <div className={`border-2 border-black absolute w-10/12 `}>
+          <div className="bg-blue-900 dark:bg-red-900 flex justify-between items-center p-2 border-b-rounded-lg cursor-move handle">
             <div></div>
             <h2 className="text-white">{category}</h2>
             <ButtonGroup category={category} />
@@ -58,29 +58,3 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({ category }) => {
     </div>
   );
 };
-
-// export const TableContents = () => {
-//   return (
-//     <table className="table-auto border w-full">
-//       <thead>
-//         <tr>
-//           <th>Header 1</th>
-//           <th>Header 2</th>
-//           <th>Header 3</th>
-//         </tr>
-//       </thead>
-//       <tbody>
-//         <tr>
-//           <td className="text-center">Data 1</td>
-//           <td className="text-center">Data 2</td>
-//           <td className="text-center">Data 3</td>
-//         </tr>
-//         <tr>
-//           <td className="text-center">Data 4</td>
-//           <td className="text-center">Data 5</td>
-//           <td className="text-center">Data 6</td>
-//         </tr>
-//       </tbody>
-//     </table>
-//   );
-// };

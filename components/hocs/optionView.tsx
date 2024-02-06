@@ -1,4 +1,5 @@
 import { WindowSlice } from "@/app/GlobalRedux/Features/windows/windowSlice";
+import { Music } from "../ui/music/music";
 
 interface OptionViewProps {
   category: keyof WindowSlice;
@@ -15,11 +16,11 @@ export const OptionView: React.FC<OptionViewProps> = ({ category }) => {
       case "movies":
         return <div> movies</div>;
       default:
-        return <div>music</div>;
+        return <Music />;
     }
   };
   return (
-    <div className={`border-2 bg-white border-black border-b-rounded-lg`}>
+    <div className={`bg-background border-2 border-b-rounded-lg `}>
       {showCategory(category)}
     </div>
   );
